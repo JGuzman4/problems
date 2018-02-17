@@ -16,11 +16,11 @@ string number = "";
 
 
 
-int thirteenProduct(int index);
+unsigned long int thirteenProduct(int index);
 
 int main(){
 
-  int greatest = 0;
+  unsigned long int greatest = 0;
   number += "73167176531330624919225119674426574742355349194934";
   number += "96983520312774506326239578318016984801869478851843";
   number += "85861560789112949495459501737958331952853208805511";
@@ -52,8 +52,8 @@ int main(){
   return 0;
 }
 
-int thirteenProduct(int index){
-  int product = (number[index] - '0');
+unsigned long int thirteenProduct(int index){
+  unsigned long int product = (number[index] - '0');
   for (int i = index+1; i < index + 13; i++){
     product *= (number[i] - '0');
   }
