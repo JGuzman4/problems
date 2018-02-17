@@ -53,9 +53,9 @@ int main(){
 }
 
 int thirteenProduct(int index){
-  int product = 1;
-  for (int i = index; i < index + 13; i++){
-    product *= std::stoi(number[i]);
+  int product = (number[index] - '0');
+  for (int i = index+1; i < index + 13; i++){
+    product *= (number[i] - '0');
   }
   return product;
 }
