@@ -1,5 +1,5 @@
 vagrantfile
 /.vagrant
-*.swp
-*.o
+**/*.swp
+**/*.o
 **/main
