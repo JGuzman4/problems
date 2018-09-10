@@ -7,12 +7,12 @@ vector<string> split_string(string);
 // Complete the miniMaxSum function below.
 void miniMaxSum(vector<int> arr) {
 
-  int min = std::numeric_limits<int>::max();
-  int max = 0;
+  long double min = std::numeric_limits<double>::max();
+  long double max = 0;
 
-  int results[5];
+  long double results[5];
 
-  int total = 0;
+  long double total = 0;
   for (unsigned int i = 0; i < arr.size(); i++)
     total += arr[i];
 
@@ -26,6 +26,7 @@ void miniMaxSum(vector<int> arr) {
       max = results[i];
   }
 
+  cout.precision(12);
   cout << min << " " << max << endl;
 
 }
