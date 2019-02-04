@@ -4,3 +4,4 @@ vagrantfile
 **/*.txt
 **/*.o
 **/main
+**/*.class
