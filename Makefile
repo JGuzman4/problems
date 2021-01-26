@@ -22,4 +22,5 @@ euler:
 
 clean:
 	@for i in $(SUBDIRS); do \
-		(cd $$i/$(lang); make clean); done
+		for j in $(LANGUAGES); do \
+			(cd $$i/$$j; make clean); done; done
