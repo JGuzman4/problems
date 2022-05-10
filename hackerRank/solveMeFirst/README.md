@@ -1,34 +1,29 @@
-A gene is represented as a string of length  (where  is divisible by ), composed of the letters , , , and . It is considered to be steady if each of the four letters occurs exactly  times. For example,  and  are both steady genes.
+Complete the function solveMeFirst to compute the sum of two integers.
 
-Bear Limak is a famous biotechnology scientist who specializes in modifying bear DNA to make it steady. Right now, he is examining a gene represented as a string . It is not necessarily steady. Fortunately, Limak can choose one (maybe empty) substring of  and replace it with any string of the same length.
+Example
+a = 7
+b = 3
 
-Modifying a large substring of bear genes can be dangerous. Given a string , can you help Limak find the length of the smallest possible substring that he can replace to make  a steady gene?
+Return 10.
 
-Note: A substring of a string  is a subsequence made up of zero or more contiguous characters of .
+Function Description
 
-Input Format
+Complete the solveMeFirst function in the editor below.
 
-The first line contains an interger  divisible by , denoting the length of a string . 
-The second line contains a string  of length .
+solveMeFirst has the following parameters:
+
+int a: the first value
+int b: the second value
+Returns
+- int: the sum of  and 
 
 Constraints
+1 <= a,b <= 1000
 
- is divisible by 
- Subtask
+Sample Input
 
-  in tests worth  points.
-  Output Format
+a = 2
+b = 3
+Sample Output
 
-  Print the length of the minimum length substring that can be replaced to make  stable.
-
-  Sample Input
-
-  8  
-  GAAATAAA
-  Sample Output
-
-  5
-  Explanation
-
-  One optimal solution is to replace  with  resulting in . 
-  The replaced substring has length .
+5
