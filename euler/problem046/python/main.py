@@ -7,12 +7,12 @@
 #
 #
 #
-print("Hello world")
 def is_prime(num):
     for i in range(3,int(num/2)):
         if num % i == 0:
             return False
     return True
+
 num = 3
 while(num < 1000): 
     num = num + 2 
