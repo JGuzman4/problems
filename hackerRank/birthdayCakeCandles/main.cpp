@@ -2,19 +2,27 @@
 
 using namespace std;
 
-vector<string> split_string(string);
+string ltrim(const string &);
+string rtrim(const string &);
+vector<string> split(const string &);
 
-// Complete the birthdayCakeCandles function below.
-int birthdayCakeCandles(vector<int> ar) {
+/*
+ * Complete the 'birthdayCakeCandles' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts INTEGER_ARRAY candles as parameter.
+ */
+
+int birthdayCakeCandles(vector<int> candles) {
 
   int tallest = 0;
   int count = 0;
-  for (unsigned int i = 0; i < ar.size(); i++){
-    if (ar[i] > tallest)
-      tallest = ar[i];
+  for (unsigned int i = 0; i < candles.size(); i++){
+    if (candles[i] > tallest)
+      tallest = candles[i];
   }
-  for (unsigned int i = 0; i < ar.size(); i++){
-    if (ar[i] == tallest)
+  for (unsigned int i = 0; i < candles.size(); i++){
+    if (candles[i] == tallest)
       count++;
   }
 
@@ -23,66 +31,70 @@ int birthdayCakeCandles(vector<int> ar) {
 
 int main()
 {
-  ofstream fout(getenv("OUTPUT_PATH"));
+    ofstream fout(getenv("OUTPUT_PATH"));
 
-  int ar_count;
-  cin >> ar_count;
-  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string candles_count_temp;
+    getline(cin, candles_count_temp);
 
-  string ar_temp_temp;
-  getline(cin, ar_temp_temp);
+    int candles_count = stoi(ltrim(rtrim(candles_count_temp)));
 
-  vector<string> ar_temp = split_string(ar_temp_temp);
+    string candles_temp_temp;
+    getline(cin, candles_temp_temp);
 
-  vector<int> ar(ar_count);
+    vector<string> candles_temp = split(rtrim(candles_temp_temp));
 
-  for (int i = 0; i < ar_count; i++) {
-    int ar_item = stoi(ar_temp[i]);
+    vector<int> candles(candles_count);
 
-    ar[i] = ar_item;
-  }
+    for (int i = 0; i < candles_count; i++) {
+        int candles_item = stoi(candles_temp[i]);
 
-  int result = birthdayCakeCandles(ar);
+        candles[i] = candles_item;
+    }
 
-  fout << result << "\n";
+    int result = birthdayCakeCandles(candles);
 
-  fout.close();
+    fout << result << "\n";
 
-  return 0;
+    fout.close();
+
+    return 0;
 }
 
-vector<string> split_string(string input_string) {
-  string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
-      return x == y and x == ' ';
-      });
+string ltrim(const string &str) {
+    string s(str);
 
-  input_string.erase(new_end, input_string.end());
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
 
-  while (input_string[input_string.length() - 1] == ' ') {
-    input_string.pop_back();
-  }
-
-  vector<string> splits;
-  char delimiter = ' ';
-
-  size_t i = 0;
-  size_t pos = input_string.find(delimiter);
-
-  while (pos != string::npos) {
-    splits.push_back(input_string.substr(i, pos - i));
-
-    i = pos + 1;
-    pos = input_string.find(delimiter, i);
-  }
-
-  splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
-
-  return splits;
+    return s;
 }
 
+string rtrim(const string &str) {
+    string s(str);
 
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
 
+    return s;
+}
 
+vector<string> split(const string &str) {
+    vector<string> tokens;
 
+    string::size_type start = 0;
+    string::size_type end = 0;
 
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
 
+        start = end + 1;
+    }
+
+    tokens.push_back(str.substr(start));
+
+    return tokens;
+}
