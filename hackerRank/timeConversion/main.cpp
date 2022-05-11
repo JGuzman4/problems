@@ -3,10 +3,13 @@
 using namespace std;
 
 /*
- *  * Complete the timeConversion function below.
- *   */
-string timeConversion(string s) {
+ * Complete the 'timeConversion' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts STRING s as parameter.
+ */
 
+string timeConversion(string s) {
 
   string hr = s.substr(0,2);
   string mm = s.substr(3,2);
@@ -23,23 +26,20 @@ string timeConversion(string s) {
   }
 
   return hr + ":" + mm + ":" + ss;
-
 }
 
 int main()
 {
-  ofstream fout(getenv("OUTPUT_PATH"));
+    ofstream fout(getenv("OUTPUT_PATH"));
 
-  string s;
-  getline(cin, s);
+    string s;
+    getline(cin, s);
 
-  string result = timeConversion(s);
+    string result = timeConversion(s);
 
-  cout << result << "\n";
+    fout << result << "\n";
 
-  fout.close();
+    fout.close();
 
-  return 0;
-
+    return 0;
 }
-
