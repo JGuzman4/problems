@@ -2,7 +2,16 @@
 
 using namespace std;
 
-vector<string> split_string(string);
+string ltrim(const string &);
+string rtrim(const string &);
+vector<string> split(const string &);
+
+/*
+ * Complete the 'aVeryBigSum' function below.
+ *
+ * The function is expected to return a LONG_INTEGER.
+ * The function accepts LONG_INTEGER_ARRAY ar as parameter.
+ */
 
 long aVeryBigSum(vector<long> ar) {
 
@@ -16,59 +25,70 @@ long aVeryBigSum(vector<long> ar) {
 
 int main()
 {
-  ofstream fout(getenv("OUTPUT_PATH"));
+    ofstream fout(getenv("OUTPUT_PATH"));
 
-  int ar_count;
-  cin >> ar_count;
-  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string ar_count_temp;
+    getline(cin, ar_count_temp);
 
-  string ar_temp_temp;
-  getline(cin, ar_temp_temp);
+    int ar_count = stoi(ltrim(rtrim(ar_count_temp)));
 
-  vector<string> ar_temp = split_string(ar_temp_temp);
+    string ar_temp_temp;
+    getline(cin, ar_temp_temp);
 
-  vector<long> ar(ar_count);
+    vector<string> ar_temp = split(rtrim(ar_temp_temp));
 
-  for (int i = 0; i < ar_count; i++) {
-    long ar_item = stol(ar_temp[i]);
+    vector<long> ar(ar_count);
 
-    ar[i] = ar_item;
-  }
+    for (int i = 0; i < ar_count; i++) {
+        long ar_item = stol(ar_temp[i]);
 
-  long result = aVeryBigSum(ar);
+        ar[i] = ar_item;
+    }
 
-  fout << result << "\n";
+    long result = aVeryBigSum(ar);
 
-  fout.close();
+    fout << result << "\n";
 
-  return 0;
+    fout.close();
+
+    return 0;
 }
 
-vector<string> split_string(string input_string) {
-  string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
-      return x == y and x == ' ';
-      });
+string ltrim(const string &str) {
+    string s(str);
 
-  input_string.erase(new_end, input_string.end());
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
 
-  while (input_string[input_string.length() - 1] == ' ') {
-    input_string.pop_back();
-  }
+    return s;
+}
 
-  vector<string> splits;
-  char delimiter = ' ';
+string rtrim(const string &str) {
+    string s(str);
 
-  size_t i = 0;
-  size_t pos = input_string.find(delimiter);
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
 
-  while (pos != string::npos) {
-    splits.push_back(input_string.substr(i, pos - i));
+    return s;
+}
 
-    i = pos + 1;
-    pos = input_string.find(delimiter, i);
-  }
+vector<string> split(const string &str) {
+    vector<string> tokens;
 
-  splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+    string::size_type start = 0;
+    string::size_type end = 0;
 
-  return splits;
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
+
+        start = end + 1;
+    }
+
+    tokens.push_back(str.substr(start));
+
+    return tokens;
 }
