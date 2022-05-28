@@ -6,7 +6,7 @@ RUN curl -O 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/
 
 RUN yum update -y && \
     yum groupinstall -y "Development Tools" && \
-    yum install -y yum-utils boost-devel
+    yum install -y yum-utils boost-devel vim
 RUN dnf install gmp-devel -y && \
     dnf install boost -y
 
@@ -15,3 +15,5 @@ WORKDIR /app
 COPY euler euler
 COPY hackerRank hackerRank
 COPY Makefile Makefile
+
+ENV OUTPUT_PATH=.
