@@ -4,41 +4,33 @@
 
 using namespace std;
 
-class Node {
-public:
-    int val;
-    vector<Node*> children;
-
-    Node() {}
-
-    Node(int _val) {
-        val = _val;
-    }
-
-    Node(int _val, vector<Node*> _children) {
-        val = _val;
-        children = _children;
-    }
-};
+ struct TreeNode {
+     int val;
+     TreeNode *left;
+     TreeNode *right;
+     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ };
 
 class Solution {
 public:
-    vector<int> preorder(Node* root) {
-
+    vector<int> inorderTraversal(TreeNode* root) {
         vector<int> nodes;
 
         if (root == NULL) {
             return nodes;
         }
 
-        nodes.push_back(root->val);
-        for (int i = 0; i < root->children.size(); i++) {
-            vector<int> children = preorder(root->children[i]);
-            for (int j = 0; j < children.size(); j++) {
-                nodes.push_back(children[j]);
-            }
+        vector<int> leftChildren = inorderTraversal(root->left);
+        for (int i = 0; i < leftChildren.size(); i++) {
+            nodes.push_back(leftChildren[i]);
         }
-
+        nodes.push_back(root->val);
+        vector<int> rightChildren = inorderTraversal(root->right);
+        for (int i = 0; i < rightChildren.size(); i++) {
+            nodes.push_back(rightChildren[i]);
+        }
 
         return nodes;
     }
