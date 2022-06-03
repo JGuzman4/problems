@@ -23,20 +23,22 @@ public:
 
 class Solution {
 public:
-    vector<int> postorder(Node* root) {
+    vector<int> preorder(Node* root) {
 
         vector<int> nodes;
+
         if (root == NULL) {
             return nodes;
         }
 
+        nodes.push_back(root->val);
         for (int i = 0; i < root->children.size(); i++) {
-            vector<int> children = postorder(root->children[i]);
+            vector<int> children = preorder(root->children[i]);
             for (int j = 0; j < children.size(); j++) {
                 nodes.push_back(children[j]);
             }
         }
-        nodes.push_back(root->val);
+
 
         return nodes;
     }
